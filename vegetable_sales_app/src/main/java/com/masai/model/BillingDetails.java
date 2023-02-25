@@ -13,6 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class BillingDetails {
 
@@ -22,14 +31,14 @@ public class BillingDetails {
 	private String transactionMode;
 	private LocalDateTime transactionDate;
 	
-	@Enumerated(EnumType.STRING)
-	private TransactionMode transactionStatus;
+	private Boolean transactionStatus;
 	
 	@Embedded
 	private Address billingAddress;
 	
+	@JsonIgnore
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="orderId")
+//	@JoinColumn(name="orderId")
 	private Orders order;
 	
 	
